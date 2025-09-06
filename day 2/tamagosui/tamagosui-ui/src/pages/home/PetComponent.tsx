@@ -11,6 +11,8 @@ import {
   BriefcaseIcon,
   ZapIcon,
   ChevronUpIcon,
+  CogIcon,
+  GlassesIcon, // Ditambahkan untuk ikon kacamata
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -39,6 +41,8 @@ import { useMutatePlayWithPet } from "@/hooks/useMutatePlayWithPet";
 import { useMutateWakeUpPet } from "@/hooks/useMutateWakeUpPet";
 import { useMutateWorkForCoins } from "@/hooks/useMutateWorkForCoins";
 import { useQueryGameBalance } from "@/hooks/useQueryGameBalance";
+import { useMutateMintCatnip } from "@/hooks/useMutateMintCatnip";
+import { useMutateMintGlasses } from "@/hooks/useMutateMintGlasses"; // Ditambahkan hook untuk kacamata
 
 import type { PetStruct } from "@/types/Pet";
 
@@ -66,15 +70,17 @@ export default function PetComponent({ pet }: PetDashboardProps) {
     useMutateWakeUpPet();
   const { mutate: mutateLevelUp, isPending: isLevelingUp } =
     useMutateCheckAndLevelUp();
+  
+  // Hooks untuk minting item baru
+  const { mutate: mintCatnip, isPending: isMintingCatnip } = useMutateMintCatnip();
+  const { mutate: mintGlasses, isPending: isMintingGlasses } = useMutateMintGlasses();
 
   useEffect(() => {
     setDisplayStats(pet.stats);
   }, [pet.stats]);
 
   useEffect(() => {
-    // This effect only runs when the pet is sleeping
     if (pet.isSleeping && !isWakingUp && gameBalance) {
-      // Start a timer that updates the stats every second
       const intervalId = setInterval(() => {
         setDisplayStats((prev) => {
           const energyPerSecond =
@@ -93,12 +99,10 @@ export default function PetComponent({ pet }: PetDashboardProps) {
             happiness: Math.max(0, prev.happiness - happinessLossPerSecond),
           };
         });
-      }, 1000); // Runs every second
-
-      // IMPORTANT: Clean up the timer when the pet wakes up or the component unmounts
+      }, 1000);
       return () => clearInterval(intervalId);
     }
-  }, [pet.isSleeping, isWakingUp, gameBalance]); // Rerun this effect if sleep status or balance changes
+  }, [pet.isSleeping, isWakingUp, gameBalance]);
 
   if (isLoadingGameBalance || !gameBalance)
     return (
@@ -107,12 +111,15 @@ export default function PetComponent({ pet }: PetDashboardProps) {
       </div>
     );
 
-  // --- Client-side UI Logic & Button Disabling ---
-  // `isAnyActionPending` prevents the user from sending multiple transactions at once.
   const isAnyActionPending =
-    isFeeding || isPlaying || isSleeping || isWorking || isLevelingUp;
+    isFeeding ||
+    isPlaying ||
+    isSleeping ||
+    isWorking ||
+    isLevelingUp ||
+    isMintingCatnip ||
+    isMintingGlasses; // Ditambahkan status minting kacamata
 
-  // These `can...` variables mirror the smart contract's rules (`assert!`) on the client-side.
   const canFeed =
     !pet.isSleeping &&
     pet.stats.hunger < gameBalance.max_stat &&
@@ -142,7 +149,6 @@ export default function PetComponent({ pet }: PetDashboardProps) {
         </CardHeader>
 
         <CardContent className="space-y-4">
-          {/* Pet Image */}
           <div className="flex justify-center">
             <img
               src={pet.image_url}
@@ -151,7 +157,6 @@ export default function PetComponent({ pet }: PetDashboardProps) {
             />
           </div>
 
-          {/* Game & Stats Data */}
           <div className="space-y-3">
             <div className="flex justify-between items-center text-lg">
               <Tooltip>
@@ -174,7 +179,6 @@ export default function PetComponent({ pet }: PetDashboardProps) {
               </Tooltip>
             </div>
 
-            {/* Stat Bars */}
             <div className="space-y-2">
               <StatDisplay
                 icon={<BatteryIcon className="text-green-500" />}
@@ -268,6 +272,38 @@ export default function PetComponent({ pet }: PetDashboardProps) {
           pet={pet}
           isAnyActionPending={isAnyActionPending || pet.isSleeping}
         />
+        
+        <div className="p-4 border-t-2 space-y-2">
+            <h3 className="text-sm font-semibold text-center text-gray-500">
+              MINT ITEMS
+            </h3>
+            <Button
+              onClick={() => mintCatnip()}
+              disabled={isAnyActionPending}
+              className="w-full"
+              variant="outline"
+            >
+              {isMintingCatnip ? (
+                <Loader2Icon className="mr-2 h-4 w-4 animate-spin" />
+              ) : (
+                <CogIcon className="mr-2 h-4 w-4" />
+              )}
+              Mint Catnip
+            </Button>
+            <Button
+              onClick={() => mintGlasses()}
+              disabled={isAnyActionPending}
+              className="w-full"
+              variant="outline"
+            >
+              {isMintingGlasses ? (
+                <Loader2Icon className="mr-2 h-4 w-4 animate-spin" />
+              ) : (
+                <GlassesIcon className="mr-2 h-4 w-4" />
+              )}
+              Mint Cool Glasses
+            </Button>
+        </div>
       </Card>
     </TooltipProvider>
   );

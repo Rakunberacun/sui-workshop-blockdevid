@@ -1,14 +1,10 @@
 import { GlassesIcon, Loader2Icon, WarehouseIcon } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import { CardFooter } from "@/components/ui/card";
-
 import { UseMutateEquipAccessory } from "@/hooks/useMutateEquipAccessory";
-import { useMutateMintAccessory } from "@/hooks/useMutateMintAccessory";
 import { UseMutateUnequipAccessory } from "@/hooks/useMutateUnequipAccessory";
 import { useQueryEquippedAccessory } from "@/hooks/useQueryEquippedAccessory";
 import { useQueryOwnedAccessories } from "@/hooks/useQueryOwnedAccessories";
-
 import type { PetStruct } from "@/types/Pet";
 
 type WardrobeManagerProps = {
@@ -21,7 +17,6 @@ export function WardrobeManager({
   isAnyActionPending,
 }: WardrobeManagerProps) {
   // --- Hooks for Actions ---
-  const { mutate: mutateMint, isPending: isMinting } = useMutateMintAccessory();
   const { mutate: mutateEquip, isPending: isEquipping } =
     UseMutateEquipAccessory();
   const { mutate: mutateUnequip, isPending: isUnequipping } =
@@ -34,17 +29,21 @@ export function WardrobeManager({
     useQueryEquippedAccessory({ petId: pet.id });
 
   // A specific loading state for wardrobe actions to disable buttons.
-  const isProcessingWardrobe = isMinting || isEquipping || isUnequipping;
+  const isProcessingWardrobe = isEquipping || isUnequipping;
   const isLoading = isLoadingAccessories || isLoadingEquipped;
 
   const renderContent = () => {
-    // Priority 1: Handle the loading state first to prevent UI flicker.
+    // Priority 1: Handle the loading state.
     if (isLoading) {
       return (
-        <p className="text-sm text-muted-foreground">Loading wardrobe...</p>
+        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <Loader2Icon className="h-4 w-4 animate-spin" />
+          <span>Loading wardrobe...</span>
+        </div>
       );
     }
-    // Priority 2: Check if an accessory is currently equipped. If so, show the "Unequip" UI.
+
+    // Priority 2: Check if an accessory is currently equipped.
     if (equippedAccessory) {
       return (
         <div className="flex items-center justify-between w-full">
@@ -54,12 +53,11 @@ export function WardrobeManager({
               alt={equippedAccessory.name}
               className="w-12 h-12 rounded-md border p-1 bg-white"
             />
-            <p className="text-sm font-semibold">
+            <p className="text-sm font-semibold capitalize">
               Equipped: <strong>{equippedAccessory.name}</strong>
             </p>
           </div>
           <Button
-            className="cursor-pointer"
             onClick={() => mutateUnequip({ petId: pet.id })}
             disabled={isAnyActionPending || isProcessingWardrobe}
             variant="destructive"
@@ -73,51 +71,51 @@ export function WardrobeManager({
         </div>
       );
     }
+
     // Priority 3: If nothing is equipped, check the user's wallet inventory.
     if (ownedAccessories && ownedAccessories.length > 0) {
       return (
-        <div className="flex items-center justify-between w-full">
-          <div className="flex items-center gap-3">
-            <img
-              src={ownedAccessories[0].image_url}
-              alt={ownedAccessories[0].name}
-              className="w-12 h-12 rounded-md border p-1 bg-white"
-            />
-            <p className="text-sm font-semibold">{ownedAccessories[0].name}</p>
-          </div>
-          <Button
-            className="cursor-pointer"
-            onClick={() =>
-              mutateEquip({
-                petId: pet.id,
-                accessoryId: ownedAccessories[0].id.id,
-              })
-            }
-            disabled={isAnyActionPending || isProcessingWardrobe}
-            size="sm"
-          >
-            {isEquipping && (
-              <Loader2Icon className="mr-2 h-4 w-4 animate-spin" />
-            )}{" "}
-            Equip
-          </Button>
+        // Gunakan .map() untuk me-looping dan menampilkan SEMUA item
+        <div className="flex flex-col gap-3 w-full">
+          {ownedAccessories.map((accessory) => (
+            <div
+              key={accessory.id.id}
+              className="flex items-center justify-between w-full"
+            >
+              <div className="flex items-center gap-3">
+                <img
+                  src={accessory.image_url}
+                  alt={accessory.name}
+                  className="w-12 h-12 rounded-md border p-1 bg-white"
+                />
+                <p className="text-sm font-semibold capitalize">{accessory.name}</p>
+              </div>
+              <Button
+                onClick={() =>
+                  mutateEquip({
+                    petId: pet.id,
+                    accessoryId: accessory.id.id, // Gunakan ID dari item yang di-loop
+                  })
+                }
+                disabled={isAnyActionPending || isProcessingWardrobe}
+                size="sm"
+              >
+                {isEquipping && (
+                  <Loader2Icon className="mr-2 h-4 w-4 animate-spin" />
+                )}
+                Equip
+              </Button>
+            </div>
+          ))}
         </div>
       );
     }
-    // Priority 4: If nothing is equipped and inventory is empty, show the "Mint" button.
+    
+    // Priority 4: If nothing is equipped and inventory is empty.
     return (
-      <Button
-        onClick={() => mutateMint()}
-        disabled={isAnyActionPending || isProcessingWardrobe}
-        className="w-full cursor-pointer"
-      >
-        {isMinting ? (
-          <Loader2Icon className="mr-2 h-4 w-4 animate-spin" />
-        ) : (
-          <GlassesIcon className="mr-2 h-4 w-4" />
-        )}{" "}
-        Mint Cool Glasses
-      </Button>
+      <p className="text-sm text-muted-foreground">
+        You don't own any accessories.
+      </p>
     );
   };
 

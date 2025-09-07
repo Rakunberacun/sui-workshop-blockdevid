@@ -120,10 +120,8 @@ export function WardrobeManager({
   };
 
   return (
-    <CardFooter className="flex-col items-start gap-4 border-t pt-4">
-      <h3 className="font-bold text-muted-foreground flex items-center gap-2 mx-auto">
-        <WarehouseIcon size={16} /> WARDROBE
-      </h3>
+    <CardFooter className="flex-col items-start gap-4 pt-4">
+      <h3 className="text-3xl font-bold flex items-center gap-2 mx-auto">Wardrobe</h3>
       <div className="w-full text-center p-2 bg-muted rounded-lg min-h-[72px] flex items-center justify-center">
         {renderContent()}
       </div>

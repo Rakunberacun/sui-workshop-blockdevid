@@ -15,18 +15,18 @@ const E_PET_IS_ASLEEP: u64 = 108;
 const E_PET_IS_ALREADY_ASLEEP: u64 = 109;
 
 // === Constants ===
-const PET_LEVEL_1_IMAGE_URL: vector<u8> = b"https://tan-kind-lizard-741.mypinata.cloud/ipfs/bafkreidkhjpthergw2tcg6u5r344shgi2cdg5afmhgpf5bv34vqfrr7hni";
-const PET_LEVEL_1_IMAGE_WITH_GLASSES_URL: vector<u8> = b"https://tan-kind-lizard-741.mypinata.cloud/ipfs/bafkreibizappmcjaq5a5metl27yc46co4kxewigq6zu22vovwvn5qfsbiu";
-const PET_LEVEL_2_IMAGE_URL: vector<u8> = b"https://tan-kind-lizard-741.mypinata.cloud/ipfs/bafkreia5tgsowzfu6mzjfcxagfpbkghfuho6y5ybetxh3wabwrc5ajmlpq";
-const PET_LEVEL_2_IMAGE_WITH_GLASSES_URL:vector<u8> = b"https://tan-kind-lizard-741.mypinata.cloud/ipfs/bafkreif5bkpnqyybq3aqgafqm72x4wfjwcuxk33vvykx44weqzuilop424";
-const PET_LEVEL_3_IMAGE_URL: vector<u8> = b"https://tan-kind-lizard-741.mypinata.cloud/ipfs/bafkreidnqerfwxuxkrdsztgflmg5jwuespdkrazl6qmk7ykfgmrfzvinoy";
-const PET_LEVEL_3_IMAGE_WITH_GLASSES_URL:vector<u8> = b"https://tan-kind-lizard-741.mypinata.cloud/ipfs/bafkreigs6r3rdupoji7pqmpwe76z7wysguzdlq43t3wqmzi2654ux5n6uu";
-const PET_SLEEP_IMAGE_URL: vector<u8> = b"https://tan-kind-lizard-741.mypinata.cloud/ipfs/bafkreihwofl5stihtzjixfhrtznd7zqkclfhmlshgsg7cbszzjqqpvf7ae";
+const PET_LEVEL_1_IMAGE_URL: vector<u8> = b"https://aqua-effective-crane-913.mypinata.cloud/ipfs/bafybeicpye2mhpfrfmpk2yn64yp5kkehyv4ovzeigy2f75vfe5e43nkzq4/1.png";
+const PET_LEVEL_1_IMAGE_WITH_GLASSES_URL: vector<u8> = b"https://aqua-effective-crane-913.mypinata.cloud/ipfs/bafybeicpye2mhpfrfmpk2yn64yp5kkehyv4ovzeigy2f75vfe5e43nkzq4/1.2.png";
+const PET_LEVEL_2_IMAGE_URL: vector<u8> = b"https://aqua-effective-crane-913.mypinata.cloud/ipfs/bafybeicpye2mhpfrfmpk2yn64yp5kkehyv4ovzeigy2f75vfe5e43nkzq4/2.png";
+const PET_LEVEL_2_IMAGE_WITH_GLASSES_URL:vector<u8> = b"https://aqua-effective-crane-913.mypinata.cloud/ipfs/bafybeicpye2mhpfrfmpk2yn64yp5kkehyv4ovzeigy2f75vfe5e43nkzq4/2.2.png";
+const PET_LEVEL_3_IMAGE_URL: vector<u8> = b"https://aqua-effective-crane-913.mypinata.cloud/ipfs/bafybeicpye2mhpfrfmpk2yn64yp5kkehyv4ovzeigy2f75vfe5e43nkzq4/3.png";
+const PET_LEVEL_3_IMAGE_WITH_GLASSES_URL:vector<u8> = b"https://aqua-effective-crane-913.mypinata.cloud/ipfs/bafybeicpye2mhpfrfmpk2yn64yp5kkehyv4ovzeigy2f75vfe5e43nkzq4/3.3.png";
+const PET_SLEEP_IMAGE_URL: vector<u8> = b"https://aqua-effective-crane-913.mypinata.cloud/ipfs/bafybeicpye2mhpfrfmpk2yn64yp5kkehyv4ovzeigy2f75vfe5e43nkzq4/4.png";
 const ACCESSORY_GLASSES_IMAGE_URL: vector<u8> = b"https://tan-kind-lizard-741.mypinata.cloud/ipfs/bafkreigyivmq45od3jkryryi3w6t5j65hcnfh5kgwpi2ex7llf2i6se7de";
 const ACCESSORY_CATNIP_IMAGE_URL: vector<u8> = b"https://aqua-effective-crane-913.mypinata.cloud/ipfs/bafybeie6ahhgruszbfm7mceqr3ytkniop4dhbmzhldespyb3i5djwntybu";
-const PET_LEVEL_1_IMAGE_WITH_CATNIP_URL: vector<u8> = b"https://aqua-effective-crane-913.mypinata.cloud/ipfs/bafybeiddehsbcemuzt73mu76d6i5ylaotoaacsmnsuorqt6uv5adhldide";
-const PET_LEVEL_2_IMAGE_WITH_CATNIP_URL: vector<u8> = b"https://aqua-effective-crane-913.mypinata.cloud/ipfs/bafybeidj46o7ote64oxbzxdzzxkoweobgl56ttwyvemunl7nxyvzphjpfe";
-const PET_LEVEL_3_IMAGE_WITH_CATNIP_URL: vector<u8> = b"https://aqua-effective-crane-913.mypinata.cloud/ipfs/bafybeifzzzk3jwp7pmlqnlabo4sfjccrwhaft4i37gduvaeaav2qwkueiy";
+const PET_LEVEL_1_IMAGE_WITH_CATNIP_URL: vector<u8> = b"https://aqua-effective-crane-913.mypinata.cloud/ipfs/bafybeicpye2mhpfrfmpk2yn64yp5kkehyv4ovzeigy2f75vfe5e43nkzq4/1.1.png";
+const PET_LEVEL_2_IMAGE_WITH_CATNIP_URL: vector<u8> = b"https://aqua-effective-crane-913.mypinata.cloud/ipfs/bafybeicpye2mhpfrfmpk2yn64yp5kkehyv4ovzeigy2f75vfe5e43nkzq4/2.1.png";
+const PET_LEVEL_3_IMAGE_WITH_CATNIP_URL: vector<u8> = b"https://aqua-effective-crane-913.mypinata.cloud/ipfs/bafybeicpye2mhpfrfmpk2yn64yp5kkehyv4ovzeigy2f75vfe5e43nkzq4/3.1.png";
 
 const EQUIPPED_ITEM_KEY: vector<u8> = b"equipped_item";
 const SLEEP_STARTED_AT_KEY: vector<u8> = b"sleep_started_at";

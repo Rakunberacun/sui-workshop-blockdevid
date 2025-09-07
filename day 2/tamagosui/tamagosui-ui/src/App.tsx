@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
+import './index.css';
 import Providers from "./providers";
 import HomePage from "./pages/home";
 import { Toaster } from "./components/ui/sonner";

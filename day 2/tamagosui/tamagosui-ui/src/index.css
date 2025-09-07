@@ -43,9 +43,8 @@
 
 :root {
   --radius: 0.625rem;
-  /* MODIFIED: Gradient dari putih ke abu-abu terang (warna --secondary) */
-  --background: linear-gradient(to bottom, oklch(1 0 0), oklch(0.97 0 0));
-  --foreground: oklch(0.145 0 0);
+  --background: oklch(1 0 0); /* white */
+  --foreground: oklch(0.145 0 0); /* black */
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -78,9 +77,8 @@
 }
 
 .dark {
-  /* MODIFIED: Gradient dari hitam ke abu-abu gelap (warna --card) */
-  --background: linear-gradient(to bottom, oklch(0.145 0 0), oklch(0.205 0 0));
-  --foreground: oklch(0.985 0 0);
+  --background: oklch(0.145 0 0); /* black */
+  --foreground: oklch(0.985 0 0); /* white */
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
@@ -117,9 +115,30 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
-    /* ADDED: Ensure gradient covers the full screen */
-    min-height: 100vh;
+    @apply text-foreground;
+    
+    /* Properti untuk background gambar */
+    background-image: url('https://mir-s3-cdn-cf.behance.net/project_modules/1400/588a44195922117.66168b374ece8.gif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     background-attachment: fixed;
+    min-height: 100vh;
   }
+
+  /*
+    Memaksa div utama aplikasi Anda untuk menjadi transparan,
+    sehingga background body bisa terlihat.
+  */
+  #root, #__next {
+    background: transparent !important;
+  }
+  
+  /*
+    (Opsional) Membuat kartu menjadi semi-transparan
+  */
+  .card-transparan {
+      background-color: oklch(var(--card) / 80%) !important;
+      backdrop-filter: blur(4px);
+    }
 }

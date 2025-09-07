@@ -14,6 +14,7 @@ const mutationKeyAdoptPet = ["mutate", "adopt-pet"];
 
 type UseMutateAdoptPetParams = {
   name: string;
+  
 };
 
 export function useMutateAdoptPet() {

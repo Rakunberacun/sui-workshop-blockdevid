@@ -1,2 +1,2 @@
-<img width="2523" height="1321" alt="image" src="https://github.com/user-attachments/assets/6611f215-a7f9-4144-9412-0c769c9c3d45" />
+<img width="1905" height="988" alt="image" src="https://github.com/user-attachments/assets/2f419bdf-4e3c-4c45-ad37-0a2b7f9180fe" />
 Sui Workshop by BlockDevID and Sui

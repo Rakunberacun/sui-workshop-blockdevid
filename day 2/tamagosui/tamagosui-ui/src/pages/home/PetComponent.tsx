@@ -15,7 +15,7 @@ import {
   GlassesIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card} from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { StatDisplay } from "./components/StatDisplay";
 import { ActionButton } from "./components/ActionButton";

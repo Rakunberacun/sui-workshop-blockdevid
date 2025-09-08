@@ -1,4 +1,4 @@
-import { GlassesIcon, Loader2Icon, WarehouseIcon } from "lucide-react";
+import { Loader2Icon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CardFooter } from "@/components/ui/card";
 import { UseMutateEquipAccessory } from "@/hooks/useMutateEquipAccessory";
